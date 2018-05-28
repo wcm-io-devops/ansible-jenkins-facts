@@ -103,4 +103,6 @@ def json = JsonOutput.toJson([
     ]
 ])
 
-return json.toString()
+return json.bytes.encodeBase64().toString()
+//for test execution only
+//return json.toString()

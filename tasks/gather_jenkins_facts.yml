@@ -8,11 +8,11 @@
 
 - name: "gather_jenkins_facts : convert gathered facts to json."
   set_fact:
-    jenkins_facts_raw: "{{ _jenkins_facts_gather_script_result.output | regex_replace('^Result:\\s*(.*)$', '\\1') | from_json }}"
+    jenkins_facts_raw: "{{ _jenkins_facts_gather_script_result.output | regex_replace('^Result:\\s*(.*)\\n*$', '\\1') | b64decode }}"
 
 - name: "gather_jenkins_facts : set jenkins facts."
   set_fact:
-    jenkins_facts_updatecenter: "{{ _jenkins_facts_gather_script_result.output | regex_replace('^Result:\\s*(.*)$', '\\1') | from_json | json_query('updatecenter.status') }}"
+    jenkins_facts_updatecenter: "{{ jenkins_facts_raw | json_query('updatecenter.status') }}"
     jenkins_facts_plugins_installed: "{{ jenkins_facts_raw | json_query('pluginmanager.installedPlugins') }}"
     jenkins_facts_plugins_failed: "{{ jenkins_facts_raw | json_query('pluginmanager.failedPlugins') }}"
     jenkins_facts_csrf_enabled: "{{ jenkins_facts_raw | json_query('instance.csrf.enabled') | bool }}"
