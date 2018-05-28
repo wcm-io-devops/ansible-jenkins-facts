@@ -1,0 +1,15 @@
+- name: check if jenkins is running.
+  uri:
+    url: "{{ jenkins_facts_jenkins_base_url }}"
+    method: HEAD
+    return_content: yes
+    status_code: 200,403
+  register: _jenkins_facts_jenkins_result
+
+- name: fail when responding webservice is not a jenkins instance.
+  fail:
+    msg: no jenkins instance running on {{ jenkins_facts_jenkins_base_url }}
+  when: _jenkins_facts_jenkins_result.x_jenkins is not defined
+
+- name: gather jenkins facts
+  include_tasks: gather_jenkins_facts.yml

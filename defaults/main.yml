@@ -1,0 +1,20 @@
+# jenkins admin username
+jenkins_facts_admin_username: admin
+
+# jenkins admin password0
+jenkins_facts_admin_password: admin
+
+# hostname of the jenkins instance
+jenkins_facts_jenkins_hostname: localhost
+
+# http port of the jenkins instance
+jenkins_facts_jenkins_port: 8080
+
+# url prefix of the jenkins instance, e.g. when running in tomcat
+jenkins_facts_jenkins_url_prefix: ""
+
+# the base url of the jenkins instance
+jenkins_facts_jenkins_base_url: "http://{{ jenkins_facts_jenkins_hostname }}:{{ jenkins_facts_jenkins_port }}{{ jenkins_facts_jenkins_url_prefix }}"
+
+# when set to enable the role will log some debug information
+jenkins_facts_debug: false

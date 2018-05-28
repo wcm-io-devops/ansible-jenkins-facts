@@ -1,0 +1,55 @@
+- name: "gather_jenkins_facts : execute gather script on jenkins instance."
+  jenkins_script:
+    script: "{{ lookup('file', 'scripts/groovy/gather_jenkins_facts.groovy') }}"
+    user: "{{ jenkins_facts_admin_username }}"
+    password: "{{ jenkins_facts_admin_password }}"
+    url: "{{ jenkins_facts_jenkins_base_url }}"
+  register: _jenkins_facts_gather_script_result
+
+- name: "gather_jenkins_facts : convert gathered facts to json."
+  set_fact:
+    jenkins_facts_raw: "{{ _jenkins_facts_gather_script_result.output | regex_replace('^Result:\\s*(.*)$', '\\1') | from_json }}"
+
+- name: "gather_jenkins_facts : set jenkins facts."
+  set_fact:
+    jenkins_facts_updatecenter: "{{ _jenkins_facts_gather_script_result.output | regex_replace('^Result:\\s*(.*)$', '\\1') | from_json | json_query('updatecenter.status') }}"
+    jenkins_facts_plugins_installed: "{{ jenkins_facts_raw | json_query('pluginmanager.installedPlugins') }}"
+    jenkins_facts_plugins_failed: "{{ jenkins_facts_raw | json_query('pluginmanager.failedPlugins') }}"
+    jenkins_facts_csrf_enabled: "{{ jenkins_facts_raw | json_query('instance.csrf.enabled') | bool }}"
+    jenkins_facts_csrf_crumb: None
+
+- block:
+  - name: "gather_jenkins_facts : retrieve crumb."
+    uri:
+      url: "{{ jenkins_facts_jenkins_base_url }}/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,\":\",//crumb)"
+      force_basic_auth: true
+      user: "{{ jenkins_pipeline_library_it_admin_username }}"
+      password: "{{ jenkins_pipeline_library_it_admin_password }}"
+      return_content: yes
+    register: _jenkins_facts_csrf_crumb_result
+
+  - name: "gather_jenkins_facts : set jenkins csrf crumb."
+    set_fact:
+      jenkins_facts_csrf_crumb: "{{ _jenkins_facts_csrf_crumb_result.content | regex_replace('^Jenkins-Crumb:([0-9a-zA-Z]+)$', '\\1') }}"
+
+  when: jenkins_facts_csrf_enabled == true
+
+- name: "gather_jenkins_facts : debug."
+  debug:
+    msg:
+      - _jenkins_facts_gather_script_result.output
+      - "{{ _jenkins_facts_gather_script_result.output }}"
+      - _jenkins_facts_csrf_crumb_result
+      - "{{ _jenkins_facts_csrf_crumb_result }}"
+      - jenkins_facts_raw
+      - "{{ jenkins_facts_raw }}"
+      - jenkins_facts_updatecenter
+      - "{{ jenkins_facts_updatecenter }}"
+      - jenkins_facts_plugins_installed
+      - "{{ jenkins_facts_plugins_installed }}"
+      - jenkins_facts_plugins_failed
+      - "{{ jenkins_facts_plugins_failed }}"
+      - jenkins_facts_csrf_crumb
+      - "{{ jenkins_facts_csrf_crumb }}"
+
+  when: jenkins_facts_debug == true
