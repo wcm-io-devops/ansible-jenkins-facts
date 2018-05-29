@@ -46,6 +46,14 @@ The base url of the jenkins instance
 
 When set to enable the role will log some debug information
 
+## Dependencies
+
+This role has no hard dependencies but interacts heavily with the
+
+* [jenkins-plugins](https://github.com/wcm-io-devops/ansible-jenkins-plugins.git)
+
+role(s).
+
 ## Facts
 
 The following facts are supplied by the `jenkins-facts` rolen:
@@ -68,7 +76,7 @@ This playbook gathers facts from a jenkins instance and outputs them:
 
     - hosts: jenkins
       roles:
-        - { role: jenkins-facts, jenkins_facts_debug: true }
+        - { role: wcm-io-devops.jenkins-facts, jenkins_facts_debug: true }
 
 ## License
 
