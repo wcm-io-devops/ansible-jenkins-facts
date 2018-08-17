@@ -56,7 +56,7 @@ role(s).
 
 ## Facts
 
-The following facts are supplied by the `jenkins-facts` rolen:
+The following facts are supplied by the `jenkins_facts` role:
 
 * `{{ jenkins_facts_updatecenter }}`
   * Timestamp of last update `updateTimestamp`
