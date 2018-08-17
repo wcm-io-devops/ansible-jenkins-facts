@@ -1,4 +1,4 @@
-# wcm-io-devops.jenkins-facts
+# wcm_io_devops.jenkins_facts
 
 This role supplies facts about the jenkins instance which are currently:
 
@@ -76,7 +76,7 @@ This playbook gathers facts from a jenkins instance and outputs them:
 
     - hosts: jenkins
       roles:
-        - { role: wcm-io-devops.jenkins-facts, jenkins_facts_debug: true }
+        - { role: wcm_io_devops.jenkins_facts, jenkins_facts_debug: true }
 
 ## License
 

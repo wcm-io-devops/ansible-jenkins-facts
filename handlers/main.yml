@@ -1,2 +1,2 @@
-- name: wcm-io-devops.jenkins-facts gather
+- name: wcm_io_devops.jenkins_facts gather
   include: gather_jenkins_facts.yml
