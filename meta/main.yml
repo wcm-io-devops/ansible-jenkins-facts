@@ -17,3 +17,5 @@ galaxy_info:
     - jenkins
 
 allow_duplicates: yes
+
+dependencies: []
