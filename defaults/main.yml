@@ -15,6 +15,3 @@ jenkins_facts_jenkins_url_prefix: ""
 
 # The base url of the jenkins instance
 jenkins_facts_jenkins_base_url: "http://{{ jenkins_facts_jenkins_hostname }}:{{ jenkins_facts_jenkins_port }}{{ jenkins_facts_jenkins_url_prefix }}"
-
-# When set to enable the role will log some debug information
-jenkins_facts_debug: false

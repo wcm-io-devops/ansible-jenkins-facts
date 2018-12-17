@@ -20,31 +20,27 @@ Available variables are listed below, along with their default values:
 
     jenkins_facts_admin_username: admin
 
-Jenkins admin username
+Jenkins admin username.
 
     jenkins_facts_admin_password: admin
 
-Jenkins admin password
+Jenkins admin password.
 
     jenkins_facts_jenkins_hostname: localhost
 
-Hostname of the jenkins instance
+Hostname of the jenkins instance.
 
     jenkins_facts_jenkins_port: 8080
 
-HTTP port of the jenkins instance
+HTTP port of the jenkins instance.
 
     jenkins_facts_jenkins_url_prefix: ""
 
-Url prefix of the jenkins instance, e.g. when running in tomcat
+Url prefix of the jenkins instance, e.g. when running in tomcat.
 
     jenkins_facts_jenkins_base_url: "http://{{ jenkins_facts_jenkins_hostname }}:{{ jenkins_facts_jenkins_port }}{{ jenkins_facts_jenkins_url_prefix }}"
 
-The base url of the jenkins instance
-
-    jenkins_facts_debug: false
-
-When set to enable the role will log some debug information
+The base url of the jenkins instance.
 
 ## Dependencies
 
@@ -76,7 +72,7 @@ This playbook gathers facts from a jenkins instance and outputs them:
 
     - hosts: jenkins
       roles:
-        - { role: wcm_io_devops.jenkins_facts, jenkins_facts_debug: true }
+        - { role: wcm_io_devops.jenkins_facts }
 
 ## License
 

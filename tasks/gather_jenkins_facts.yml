@@ -32,7 +32,7 @@
     set_fact:
       jenkins_facts_csrf_crumb: "{{ _jenkins_facts_csrf_crumb_result.content | regex_replace('^Jenkins-Crumb:([0-9a-zA-Z]+)$', '\\1') }}"
 
-  when: jenkins_facts_csrf_enabled == true
+  when: jenkins_facts_csrf_enabled
 
 - name: "gather_jenkins_facts : debug."
   debug:
@@ -51,5 +51,4 @@
       - "{{ jenkins_facts_plugins_failed }}"
       - jenkins_facts_csrf_crumb
       - "{{ jenkins_facts_csrf_crumb }}"
-
-  when: jenkins_facts_debug == true
+    verbosity: 1
