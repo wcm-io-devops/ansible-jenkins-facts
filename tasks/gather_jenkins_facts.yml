@@ -8,7 +8,9 @@
 
 - name: "gather_jenkins_facts : convert gathered facts to json."
   set_fact:
-    jenkins_facts_raw: "{{ _jenkins_facts_gather_script_result.output | regex_replace('^Result:\\s*(.*)\\n*$', '\\1') | b64decode }}"
+    jenkins_facts_raw: "{{ _jenkins_facts_gather_script_result.output
+                        | regex_replace('^Result:\\s*(.*)\\n*$', '\\1')
+                        | b64decode }}"
 
 - name: "gather_jenkins_facts : set jenkins facts."
   set_fact:
@@ -30,7 +32,8 @@
 
   - name: "gather_jenkins_facts : set jenkins csrf crumb."
     set_fact:
-      jenkins_facts_csrf_crumb: "{{ _jenkins_facts_csrf_crumb_result.content | regex_replace('^Jenkins-Crumb:([0-9a-zA-Z]+)$', '\\1') }}"
+      jenkins_facts_csrf_crumb: "{{ _jenkins_facts_csrf_crumb_result.content
+                                    | regex_replace('^Jenkins-Crumb:([0-9a-zA-Z]+)$', '\\1') }}"
 
   when: jenkins_facts_csrf_enabled
 
