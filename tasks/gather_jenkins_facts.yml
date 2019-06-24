@@ -4,6 +4,7 @@
     user: "{{ jenkins_facts_admin_username }}"
     password: "{{ jenkins_facts_admin_password }}"
     url: "{{ jenkins_facts_jenkins_base_url }}"
+    timeout: "{{ jenkins_facts_script_timeout }}"
   register: _jenkins_facts_gather_script_result
 
 - name: "gather_jenkins_facts : convert gathered facts to json."
@@ -27,7 +28,9 @@
       force_basic_auth: true
       user: "{{ jenkins_facts_admin_username }}"
       password: "{{ jenkins_facts_admin_password }}"
+      timeout: "{{ jenkins_facts_uri_timeout }}"
       return_content: yes
+
     register: _jenkins_facts_csrf_crumb_result
 
   - name: "gather_jenkins_facts : set jenkins csrf crumb."

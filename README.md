@@ -42,6 +42,14 @@ Url prefix of the jenkins instance, e.g. when running in tomcat.
 
 The base url of the jenkins instance.
 
+    jenkins_facts_script_timeout: 30
+
+The timeout for gathering facts via jenkins_script.
+
+    jenkins_facts_uri_timeout: 30
+
+The timeout for uri commands.
+
 ## Dependencies
 
 This role has no hard dependencies but interacts heavily with the
