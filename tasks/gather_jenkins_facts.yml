@@ -10,7 +10,7 @@
 - name: "gather_jenkins_facts : convert gathered facts to json."
   set_fact:
     jenkins_facts_raw: "{{ _jenkins_facts_gather_script_result.output
-                        | regex_replace('^Result:\\s*(.*)\\n*$', '\\1')
+                        | regex_replace('\\s*Result:\\s*(.*)\\n*$', '\\1')
                         | b64decode }}"
 
 - name: "gather_jenkins_facts : set jenkins facts."
