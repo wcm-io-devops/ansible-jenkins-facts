@@ -20,23 +20,27 @@
     jenkins_facts_plugins_failed: "{{ jenkins_facts_raw | json_query('pluginmanager.failedPlugins') }}"
     jenkins_facts_csrf_enabled: "{{ jenkins_facts_raw | json_query('instance.csrf.enabled') | bool }}"
     jenkins_facts_csrf_crumb: None
+    jenkins_facts_cookie: None
 
 - block:
-  - name: "gather_jenkins_facts : retrieve crumb."
+
+  - name: "gather_jenkins_facts : get cookie and crumb."
     uri:
-      url: "{{ jenkins_facts_jenkins_base_url }}/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,\":\",//crumb)"
-      force_basic_auth: true
+      url: "{{ jenkins_facts_jenkins_base_url }}/crumbIssuer/api/json"
       user: "{{ jenkins_facts_admin_username }}"
       password: "{{ jenkins_facts_admin_password }}"
       timeout: "{{ jenkins_facts_uri_timeout }}"
-      return_content: yes
-
+      return_content: true
+      force_basic_auth: true
+      method: GET
+      status_code: 200
     register: _jenkins_facts_csrf_crumb_result
+    changed_when: false
 
   - name: "gather_jenkins_facts : set jenkins csrf crumb."
     set_fact:
-      jenkins_facts_csrf_crumb: "{{ _jenkins_facts_csrf_crumb_result.content
-                                    | regex_replace('^Jenkins-Crumb:([0-9a-zA-Z]+)$', '\\1') }}"
+      jenkins_facts_csrf_crumb: "{{ _jenkins_facts_csrf_crumb_result.json.crumb }}"
+      jenkins_facts_cookie: "{{ _jenkins_facts_csrf_crumb_result.set_cookie }}"
 
   when: jenkins_facts_csrf_enabled | bool
 
@@ -57,4 +61,6 @@
       - "{{ jenkins_facts_plugins_failed }}"
       - jenkins_facts_csrf_crumb
       - "{{ jenkins_facts_csrf_crumb }}"
+      - jenkins_facts_csrf_crumb
+      - "{{ jenkins_facts_cookie }}"
     verbosity: 1

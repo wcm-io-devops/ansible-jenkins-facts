@@ -71,8 +71,9 @@ The following facts are supplied by the `jenkins_facts` role:
 * `{{ jenkins_facts_plugins_failed }}`: List of plugins that failed to
   load with the cause
 * `{{ jenkins_facts_csrf_enabled }}`: Status if CSRF protection is
-  enabled or disabled
+  enabled or disabled (in newer Jenkins instances CSRF protection is mandatory)
 * `{{ jenkins_facts_csrf_crumb }}`: Fresh/current CSRD Jenkins-Crumb token
+* `{{ jenkins_facts_cookie }}`: Fresh/current Cookie token
 
 ## Example Playbook
 
