@@ -12,7 +12,7 @@ jenkins instance, see:
 
 ## Requirements
 
-This role requires Ansible 2.4 or higher and works with AEM 6.1 or higher. The role requires an AEM service that can be controlled with the Ansible `service` module to be installed on the target machine.
+This role requires Ansible 2.4 or higher. On the controlhost the pip package `jmespath` is required.
 
 ## Role Variables
 
