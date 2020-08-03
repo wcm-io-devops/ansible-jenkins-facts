@@ -40,7 +40,7 @@
   - name: "gather_jenkins_facts : set jenkins csrf crumb."
     set_fact:
       jenkins_facts_csrf_crumb: "{{ _jenkins_facts_csrf_crumb_result.json.crumb }}"
-      jenkins_facts_cookie: "{{ _jenkins_facts_csrf_crumb_result.set_cookie }}"
+      jenkins_facts_cookie: "{{ _jenkins_facts_csrf_crumb_result.set_cookie | default(None) }}"
 
   when: jenkins_facts_csrf_enabled | bool
 
