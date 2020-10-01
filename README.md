@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/wcm-io-devops/ansible-jenkins-facts.svg?branch=master)](https://travis-ci.org/wcm-io-devops/ansible-jenkins-facts)
+
 # wcm_io_devops.jenkins_facts
 
 This role supplies facts about the jenkins instance which are currently:
@@ -12,7 +14,7 @@ jenkins instance, see:
 
 ## Requirements
 
-This role requires Ansible 2.4 or higher. On the controlhost the pip package `jmespath` is required.
+This role requires Ansible 2.7 or higher. On the controlhost the pip package `jmespath` is required.
 
 ## Role Variables
 
