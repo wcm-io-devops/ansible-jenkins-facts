@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/wcm-io-devops/ansible-jenkins-facts.svg?branch=master)](https://travis-ci.org/wcm-io-devops/ansible-jenkins-facts)
+[![Build Status](https://travis-ci.com/wcm-io-devops/ansible-jenkins-facts.svg?branch=master)](https://travis-ci.com/wcm-io-devops/ansible-jenkins-facts)
 
 # wcm_io_devops.jenkins_facts
 
