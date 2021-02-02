@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/wcm-io-devops/ansible-jenkins-facts.svg?branch=master)](https://travis-ci.com/wcm-io-devops/ansible-jenkins-facts)
+[![CI](https://github.com/wcm-io-devops/ansible-jenkins-facts/workflows/CI/badge.svg?branch=master&event=push)](https://github.com/wcm-io-devops/ansible-jenkins-facts/actions?query=workflow%3ACI)
 
 # wcm_io_devops.jenkins_facts
 
