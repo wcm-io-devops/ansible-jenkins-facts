@@ -1,6 +1,7 @@
 ---
 galaxy_info:
   role_name: jenkins_facts
+  namespace: wcm_io_devops
   author: Tobias Richter
   description: Role for gathing facts from Jenkins instances.
   company: pro!vision
