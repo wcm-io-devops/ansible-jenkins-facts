@@ -52,10 +52,14 @@ Map getPluginInfo(List<PluginWrapper> plugins) {
   Map ret = [:]
   for (PluginWrapper plugin in plugins) {
     UpdateSite.Plugin updateInfo = plugin.getUpdateInfo()
+    if (updateInfo != null) {
+        isCompatibleWithInstalledVersion = updateInfo.isCompatibleWithInstalledVersion()
+    }
     Map tmpPlugin = [
         version: plugin.getVersion(),
         enabled: plugin.isEnabled(),
         active: plugin.isActive(),
+        isCompatibleWithInstalledVersion: isCompatibleWithInstalledVersion,
         hasUpdate: updateInfo != null
     ]
     ret[plugin.getShortName()] = tmpPlugin
