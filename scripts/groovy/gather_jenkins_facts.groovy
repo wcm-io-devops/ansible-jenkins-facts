@@ -52,6 +52,7 @@ Map getPluginInfo(List<PluginWrapper> plugins) {
   Map ret = [:]
   for (PluginWrapper plugin in plugins) {
     UpdateSite.Plugin updateInfo = plugin.getUpdateInfo()
+    Boolean isCompatibleWithInstalledVersion = false
     if (updateInfo != null) {
         isCompatibleWithInstalledVersion = updateInfo.isCompatibleWithInstalledVersion()
     }
